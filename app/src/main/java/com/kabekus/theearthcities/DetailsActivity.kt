@@ -13,10 +13,20 @@ class DetailsActivity : AppCompatActivity() {
         setContentView(view)
 
         val intent = intent
+        /*
         val selectCity = intent.getSerializableExtra("city") as City
-
         binding.cityNameTxt.text = selectCity.name
         binding.countryNameTxt.text =selectCity.countryName
         binding.imageView.setImageResource(selectCity.image)
+        */
+
+        //Object ile veri aktarımı
+        val selectCity = Singleton.chosenCity
+        selectCity?.let {
+            binding.cityNameTxt.text = it.name
+            binding.countryNameTxt.text =it.countryName
+            binding.imageView.setImageResource(it.image)
+        }
+
     }
 }

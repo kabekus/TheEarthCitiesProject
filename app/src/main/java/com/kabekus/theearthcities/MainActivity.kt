@@ -1,10 +1,13 @@
 package com.kabekus.theearthcities
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.LinearLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.kabekus.theearthcities.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +20,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         citiesListFun()
+
+        /*      ListView ile ilgili alan
         val adapter = ArrayAdapter(this,android.R.layout.simple_list_item_1,citiesList.map { city -> city.name })
         binding.listView.adapter = adapter
         binding.listView.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, i, l ->
@@ -24,6 +29,12 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("city",citiesList.get(i))
             startActivity(intent)
         }
+        */
+
+        //RecyclerView ile alakalı
+        binding.recyclerViewMain.layoutManager = LinearLayoutManager(this)
+        val cityAdapter = CityAdapter(citiesList)
+        binding.recyclerViewMain.adapter = cityAdapter
     }
     fun citiesListFun(){
         citiesList = ArrayList<City>()
@@ -39,5 +50,10 @@ class MainActivity : AppCompatActivity() {
         citiesList.add(roma)
         citiesList.add(shenzhen)
         citiesList.add(tokyo)
+
+        /* Resimleri tutmak için bir yöntem (! inneficient)
+        val tokyoBitmap = BitmapFactory.decodeResource(resources,R.drawable.tokyo)
+        */
+
     }
 }
